@@ -1,0 +1,96 @@
+# A simple contact book program using Python
+# This project helps store, search, update, and delete contacts.
+
+contacts = {}
+
+def show_menu():
+    print("\nContact Book Menu")
+    print("1. Add Contact")
+    print("2. View All Contacts")
+    print("3. Search Contact")
+    print("4. Update Contact")
+    print("5. Delete Contact")
+    print("6. Exit")
+
+def add_contact():
+    name = input("Enter name: ").strip()
+    phone = input("Enter phone number: ").strip()
+    email = input("Enter email address: ").strip()
+
+    if name:
+        contacts[name] = {
+            "phone": phone,
+            "email": email
+        }
+        print("Contact added successfully.")
+    else:
+        print("Name cannot be empty. Try again.")
+
+def view_contacts():
+    if not contacts:
+        print("No contacts to show.")
+    else:
+        print("\nSaved Contacts:")
+        for name, details in contacts.items():
+            print(f"Name: {name}")
+            print(f"Phone: {details['phone']}")
+            print(f"Email: {details['email']}")
+            print("-" * 30)
+
+def search_contact():
+    name = input("Enter the name to search: ").strip()
+    if name in contacts:
+        print("\nContact found:")
+        print(f"Name: {name}")
+        print(f"Phone: {contacts[name]['phone']}")
+        print(f"Email: {contacts[name]['email']}")
+    else:
+        print("Contact not found.")
+
+def update_contact():
+    name = input("Enter the name to update: ").strip()
+    if name in contacts:
+        phone = input("Enter new phone number: ").strip()
+        email = input("Enter new email: ").strip()
+        contacts[name]["phone"] = phone
+        contacts[name]["email"] = email
+        print("Contact updated.")
+    else:
+        print("No contact found with that name.")
+
+def delete_contact():
+    name = input("Enter the name to delete: ").strip()
+    if name in contacts:
+        del contacts[name]
+        print("Contact deleted.")
+    else:
+        print("Contact not found.")
+
+def main():
+    print("=" * 40)
+    print("      Contact Book Application")
+    print("   (A simple project using Python)")
+    print("=" * 40)
+
+    while True:
+        show_menu()
+        choice = input("Choose an option (1-6): ").strip()
+
+        if choice == '1':
+            add_contact()
+        elif choice == '2':
+            view_contacts()
+        elif choice == '3':
+            search_contact()
+        elif choice == '4':
+            update_contact()
+        elif choice == '5':
+            delete_contact()
+        elif choice == '6':
+            print("Exiting the program. Have a nice day.")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 6.")
+
+if __name__ == "__main__":
+    main()
