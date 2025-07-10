@@ -1,0 +1,64 @@
+def display_intro():
+    print("\n==============================================")
+    print("         Welcome to Simple Calculator")
+    print("        (Just a small Python project!)")
+    print("==============================================\n")
+
+def get_number(prompt):
+    while True:
+        value = input(prompt)
+        try:
+            return float(value)
+        except:
+            print("Invalid input. Please enter a valid number.")
+
+def get_operation():
+    print("Available operations:")
+    print(" +  for Addition")
+    print(" -  for Subtraction")
+    print(" *  for Multiplication")
+    print(" /  for Division")
+    print(" q  to Quit")
+    
+    while True:
+        op = input("Enter your choice: ").strip()
+        if op in ['+', '-', '*', '/', 'q']:
+            return op
+        else:
+            print("Please choose a valid operation.")
+
+def calculate(a, b, op):
+    if op == '+':
+        return a + b
+    elif op == '-':
+        return a - b
+    elif op == '*':
+        return a * b
+    elif op == '/':
+        if b == 0:
+            print("Cannot divide by zero.")
+            return None
+        return a / b
+
+def main():
+    display_intro()
+    
+    while True:
+        op = get_operation()
+        if op == 'q':
+            print("Exiting the calculator. Thank you!")
+            break
+        
+        num1 = get_number("Enter first number: ")
+        num2 = get_number("Enter second number: ")
+        
+        result = calculate(num1, num2, op)
+        if result is not None:
+            print(f"Result: {num1} {op} {num2} = {result}\n")
+        else:
+            print("Calculation could not be completed.\n")
+
+        print("----------------------------------------------")
+
+if __name__ == "__main__":
+    main()
